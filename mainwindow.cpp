@@ -4,6 +4,8 @@
 #include "QFileDialog"
 #include "QDebug"
 #include "QMessageBox"
+#include "QDesktopServices"
+#include "QUrl"
 
 QString MAIN_FOLDER;
 
@@ -83,19 +85,21 @@ void MainWindow::create_sub_menu(QPoint pos){
         QMenu *menu = new QMenu(this->ui->tableView);
         QAction *viewWithBrower = new QAction(QString::fromUtf8("Xem bằng trình duyệt"),menu);
         menu->addAction(viewWithBrower);
-        connect(viewWithBrower,SIGNAL(triggered()),this,SLOT(viewWithBrowser()));
+
         QAction *viewWithHtmlViewer = new QAction(QString::fromUtf8("Xem chi tiết dưới dạng bảng"),menu);
         menu->addAction(viewWithHtmlViewer);
-        connect(viewWithHtmlViewer,SIGNAL(triggered()),this,SLOT(viewWithHtmlViewer()));
-        QAction *editNote = new QAction(QString::fromUtf8("Chỉnh sửa ghi chú"),menu);
-        menu->addAction(editNote);
-        connect(editNote,SIGNAL(triggered()),this,SLOT(editNote()));
+
+//        QAction *editNote = new QAction(QString::fromUtf8("Chỉnh sửa ghi chú"),menu);
+//        menu->addAction(editNote);
+//        connect(editNote,SIGNAL(triggered()),this,SLOT(editNote()));
 //        QAction *Runx64andSave = new QAction(QString::fromUtf8("Chỉnh sửa nhãn dán"),menu);
 //        menu->addAction(Runx64andSave);
         QPoint newPoint = this->ui->tableView->mapToGlobal(pos);
         menu->mapToParent(newPoint);
         menu->move(newPoint);
         menu->show();
+        connect(viewWithBrower,SIGNAL(triggered()),this,SLOT(viewWithBrowser()));
+        connect(viewWithHtmlViewer,SIGNAL(triggered()),this,SLOT(viewWithHtmlViewer()));
 
 }
 
@@ -106,7 +110,11 @@ void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
 }
 
 void MainWindow::viewWithBrowser(){
+    QString fileName = this->ui->tableView->model()->data(this->ui->tableView->model()->index(this->current_row_selected,1)).toString();
+    if(QFile(MAIN_FOLDER+"/"+fileName).isReadable()){
 
+    }
+    QDesktopServices::openUrl(QUrl(MAIN_FOLDER+"/"+fileName));
 }
 
 void MainWindow::viewWithHtmlViewer(){
