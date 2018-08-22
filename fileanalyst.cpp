@@ -51,6 +51,7 @@ void FileAnalyst::read_file_html(QString filePath){
     qDebug()<<filePath;
     QRegExp Data_matcher("<td [^>]*>([^\<]*)");
     QRegExp Header_matcher("<th>([^\\n]*)");
+    emit add_infor_to_viewer(filePath);
 
     if(info.open(QFile::Text|QFile::ReadWrite)){
         qDebug()<<"dã d?c file";
@@ -89,4 +90,5 @@ void FileAnalyst::initHtmlViewer(){
     viewer->show();
     connect(this,SIGNAL(add_header_to_viewer(QStringList)),viewer,SLOT(setHeader(QStringList)));
     connect(this,SIGNAL(add_data_to_viewer(QStringList)),viewer,SLOT(addRow(QStringList)));
+    connect(this,SIGNAL(add_infor_to_viewer(QString)),viewer,SLOT(setInfo(QString)));
 }

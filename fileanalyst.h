@@ -17,6 +17,7 @@ signals:
     void add_row_to_mainwindow(QStringList);
     void add_header_to_viewer(QStringList);
     void add_data_to_viewer(QStringList);
+    void add_infor_to_viewer(QString);
     void send_error(QString);
 
 public slots:

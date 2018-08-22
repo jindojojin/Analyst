@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'html_viewer.ui'
 **
-** Created: Wed Aug 22 20:58:25 2018
+** Created: Wed Aug 22 22:39:12 2018
 **      by: Qt User Interface Compiler version 4.4.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -15,6 +15,7 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QGridLayout>
+#include <QtGui/QLabel>
 #include <QtGui/QTableView>
 #include <QtGui/QWidget>
 
@@ -25,6 +26,7 @@ class Ui_HTML_VIEWER
 public:
     QGridLayout *gridLayout;
     QTableView *tableView;
+    QLabel *label_infor;
 
     void setupUi(QWidget *HTML_VIEWER)
     {
@@ -38,7 +40,15 @@ public:
     tableView->setContextMenuPolicy(Qt::CustomContextMenu);
     tableView->setSortingEnabled(true);
 
-    gridLayout->addWidget(tableView, 0, 0, 1, 1);
+    gridLayout->addWidget(tableView, 1, 0, 1, 1);
+
+    label_infor = new QLabel(HTML_VIEWER);
+    label_infor->setObjectName(QString::fromUtf8("label_infor"));
+    QFont font;
+    font.setPointSize(12);
+    label_infor->setFont(font);
+
+    gridLayout->addWidget(label_infor, 0, 0, 1, 1);
 
 
     retranslateUi(HTML_VIEWER);
@@ -49,6 +59,7 @@ public:
     void retranslateUi(QWidget *HTML_VIEWER)
     {
     HTML_VIEWER->setWindowTitle(QApplication::translate("HTML_VIEWER", "HTML_Viewer", 0, QApplication::UnicodeUTF8));
+    label_infor->setText(QString());
     Q_UNUSED(HTML_VIEWER);
     } // retranslateUi
 

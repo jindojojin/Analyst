@@ -63,6 +63,8 @@ void MainWindow::on_actionM_t_p_tin_nh_t_k_c50_triggered()
 {
     QString file_path = QFileDialog::getOpenFileName(this,QString::fromUtf8("Chọn tệp tin"),"/home","*.c50");
     QFileInfo file(file_path);
+    this->model->clear();
+    this->setupTable();
     MAIN_FOLDER = file.absoluteDir().absolutePath();
     emit read_info_file(file_path);
     qDebug() << MAIN_FOLDER;

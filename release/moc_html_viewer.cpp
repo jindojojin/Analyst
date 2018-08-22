@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'html_viewer.h'
 **
-** Created: Wed Aug 22 21:02:54 2018
+** Created: Thu Aug 23 00:51:36 2018
 **      by: The Qt Meta Object Compiler version 59 (Qt 4.4.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,20 +23,25 @@ static const uint qt_meta_data_HTML_VIEWER[] = {
        1,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   10, // methods
+       5,   10, // methods
        0,    0, // properties
        0,    0, // enums/sets
 
  // slots: signature, parameters, type, tag, flags
       13,   12,   12,   12, 0x0a,
       36,   12,   12,   12, 0x0a,
+      56,   12,   12,   12, 0x0a,
+      77,   73,   12,   12, 0x08,
+     125,   12,   12,   12, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_HTML_VIEWER[] = {
     "HTML_VIEWER\0\0setHeader(QStringList)\0"
-    "addRow(QStringList)\0"
+    "addRow(QStringList)\0setInfo(QString)\0"
+    "pos\0on_tableView_customContextMenuRequested(QPoint)\0"
+    "setVisibleForColumn(int)\0"
 };
 
 const QMetaObject HTML_VIEWER::staticMetaObject = {
@@ -66,8 +71,11 @@ int HTML_VIEWER::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         switch (_id) {
         case 0: setHeader((*reinterpret_cast< QStringList(*)>(_a[1]))); break;
         case 1: addRow((*reinterpret_cast< QStringList(*)>(_a[1]))); break;
+        case 2: setInfo((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 3: on_tableView_customContextMenuRequested((*reinterpret_cast< const QPoint(*)>(_a[1]))); break;
+        case 4: setVisibleForColumn((*reinterpret_cast< int(*)>(_a[1]))); break;
         }
-        _id -= 2;
+        _id -= 5;
     }
     return _id;
 }
