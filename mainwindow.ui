@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>972</width>
+    <width>860</width>
     <height>545</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>ANALYST_c50</string>
+   <string>Trình xem kết quả</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -32,7 +32,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Chọn tập tin lưu trữ kết quả info.c50 để mở lại các dữ liệu đã thu thập</string>
+       <string>Chọn tập tin lưu trữ kết quả info.a05 để mở lại các dữ liệu đã thu thập</string>
       </property>
      </widget>
     </item>
@@ -83,7 +83,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Chọn tập tin .c50</string>
+       <string>Chọn tập tin .a05</string>
       </property>
      </widget>
     </item>
@@ -107,7 +107,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>972</width>
+     <width>860</width>
      <height>25</height>
     </rect>
    </property>

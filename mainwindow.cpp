@@ -6,7 +6,9 @@
 #include "QMessageBox"
 #include "QDesktopServices"
 #include "QUrl"
-
+#include "QPushButton"
+#include "QSignalMapper"
+#include "QThread"
 QString MAIN_FOLDER;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -26,33 +28,50 @@ MainWindow::~MainWindow()
 
 void MainWindow::init_analyst(){
     FileAnalyst *analyst = new FileAnalyst();
+    QThread *th = new QThread();
     connect(this,SIGNAL(view_detail(QString)),analyst,SLOT(read_file_html(QString)));
     connect(this,SIGNAL(read_info_file(QString)),analyst,SLOT(read_file_log(QString)));
     connect(analyst,SIGNAL(add_infor_to_mainwindow(QString,QString)),this,SLOT(add_infor_to_screen(QString,QString)));
     connect(analyst,SIGNAL(add_row_to_mainwindow(QStringList)),this,SLOT(add_row_to_table(QStringList)));
     connect(analyst,SIGNAL(send_error(QString)),this,SLOT(show_error(QString)));
+    connect(this,SIGNAL(changeNameData(QString)),analyst,SLOT(change_name_of_data(QString)));
+    analyst->moveToThread(th);
+    th->start();
 }
 
 void MainWindow::setupTable(){
-    this->model = new QStandardItemModel(0,4,this);
+    this->model = new QStandardItemModel(0,3,this);
     model->setHorizontalHeaderItem(0,new QStandardItem(QString::fromUtf8("Tên phần mềm")));
-    model->setHorizontalHeaderItem(1,new QStandardItem(QString::fromUtf8("Tệp tin kết quả")));
-    model->setHorizontalHeaderItem(3,new QStandardItem(QString::fromUtf8("Ghi chú")));
-    model->setHorizontalHeaderItem(2,new QStandardItem(QString::fromUtf8("Thời gian")));
+    model->setHorizontalHeaderItem(2,new QStandardItem(QString::fromUtf8("Kết quả")));
+//    model->setHorizontalHeaderItem(3,new QStandardItem(QString::fromUtf8("Ghi chú")));
+    model->setHorizontalHeaderItem(1,new QStandardItem(QString::fromUtf8("Thời gian")));
     this->ui->tableView->setModel(model);
     this->ui->tableView->setAlternatingRowColors(true);
     this->ui->tableView->setColumnWidth(0,330);
-    this->ui->tableView->setColumnWidth(2,330);
+    this->ui->tableView->setColumnWidth(2,100);
     this->ui->tableView->setColumnWidth(1,360);
     this->ui->tableView->show();
 }
 
 void MainWindow::add_row_to_table(QStringList list_data){
     QList<QStandardItem *> a;
+    int i=0;
     foreach(QString b, list_data){
         a.append(new QStandardItem(b));
+
     }
     this->model->appendRow(a);
+    QPushButton *btn_runx64 = new QPushButton();
+    btn_runx64->setText(QString::fromUtf8("Xem kết quả"));
+    btn_runx64->setStyleSheet("QPushButton{background-color:#00A551; font-size:12pt} QPushButton:hover{background-color:#64EDA2}");
+    this->ui->tableView->setIndexWidget(this->model->index(this->ui->tableView->model()->rowCount()-1,2),btn_runx64);
+    QSignalMapper *map64 = new QSignalMapper();
+//        map64->setMapping(btn_runx64,this->listProgram.size()-1);
+//        connect(btn_runx64,SIGNAL(clicked()),map64,SLOT(map()));
+//        connect(map64,SIGNAL(mapped(int)),this,SLOT(btn_run64_clicked(int)));
+    connect(btn_runx64,SIGNAL(clicked()),this,SLOT(viewWithHtmlViewer()));
+
+
 }
 
 void MainWindow::add_infor_to_screen(QString name, QString note){
@@ -63,7 +82,7 @@ void MainWindow::add_infor_to_screen(QString name, QString note){
 
 void MainWindow::on_actionM_t_p_tin_nh_t_k_c50_triggered()
 {
-    QString file_path = QFileDialog::getOpenFileName(this,QString::fromUtf8("Chọn tệp tin"),"/home","*.c50");
+    QString file_path = QFileDialog::getOpenFileName(this,QString::fromUtf8("Chọn tệp tin"),"/home","*.a05");
     QFileInfo file(file_path);
     this->model->clear();
     this->setupTable();
@@ -110,7 +129,7 @@ void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
 }
 
 void MainWindow::viewWithBrowser(){
-    QString fileName = this->ui->tableView->model()->data(this->ui->tableView->model()->index(this->current_row_selected,1)).toString();
+    QString fileName = this->ui->tableView->model()->data(this->ui->tableView->model()->index(this->current_row_selected,2)).toString();
     if(QFile(MAIN_FOLDER+"/"+fileName).isReadable()){
 
     }
@@ -118,8 +137,15 @@ void MainWindow::viewWithBrowser(){
 }
 
 void MainWindow::viewWithHtmlViewer(){
-    QString fileName = this->ui->tableView->model()->data(this->ui->tableView->model()->index(this->current_row_selected,1)).toString();
-    emit view_detail(MAIN_FOLDER+"/"+fileName);
+    FileAnalyst *ana = new FileAnalyst();
+    QThread *th = new QThread();
+    ana->moveToThread(th);
+    th->start();
+    QString fileName = this->ui->tableView->model()->data(this->ui->tableView->model()->index(this->current_row_selected,2)).toString();
+    QString nameofdata = this->ui->tableView->model()->data(this->ui->tableView->model()->index(this->current_row_selected,0)).toString();
+//    emit view_detail(MAIN_FOLDER+"/"+fileName);
+    ana->change_name_of_data(nameofdata);
+    ana->read_file_html(MAIN_FOLDER+"/"+fileName);
 }
 
 void MainWindow::editNote(){

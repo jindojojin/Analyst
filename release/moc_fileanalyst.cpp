@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'fileanalyst.h'
 **
-** Created: Thu Aug 23 01:05:49 2018
+** Created: Wed Apr 3 12:12:35 2019
 **      by: The Qt Meta Object Compiler version 59 (Qt 4.4.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_FileAnalyst[] = {
        1,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   10, // methods
+       9,   10, // methods
        0,    0, // properties
        0,    0, // enums/sets
 
@@ -38,6 +38,7 @@ static const uint qt_meta_data_FileAnalyst[] = {
  // slots: signature, parameters, type, tag, flags
      206,   12,   12,   12, 0x0a,
      230,   12,   12,   12, 0x0a,
+     253,   12,   12,   12, 0x0a,
 
        0        // eod
 };
@@ -50,6 +51,7 @@ static const char qt_meta_stringdata_FileAnalyst[] = {
     "add_infor_to_viewer(QString)\0"
     "send_error(QString)\0read_file_html(QString)\0"
     "read_file_log(QString)\0"
+    "change_name_of_data(QString)\0"
 };
 
 const QMetaObject FileAnalyst::staticMetaObject = {
@@ -85,8 +87,9 @@ int FileAnalyst::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 5: send_error((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 6: read_file_html((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 7: read_file_log((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 8: change_name_of_data((*reinterpret_cast< QString(*)>(_a[1]))); break;
         }
-        _id -= 8;
+        _id -= 9;
     }
     return _id;
 }

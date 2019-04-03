@@ -9,6 +9,7 @@ class FileAnalyst : public QObject
     Q_OBJECT
 public:
     explicit FileAnalyst(QObject *parent = 0);
+    QString name_of_data;
 private:
     void initHtmlViewer();
 
@@ -23,6 +24,7 @@ signals:
 public slots:
     void read_file_html(QString);
     void read_file_log(QString);
+    void change_name_of_data(QString);
 };
 
 #endif // FILEANALYST_H

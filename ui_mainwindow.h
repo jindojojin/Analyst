@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Wed Aug 22 21:02:29 2018
+** Created: Wed Apr 3 10:53:12 2019
 **      by: Qt User Interface Compiler version 4.4.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -48,7 +48,7 @@ public:
     {
     if (MainWindow->objectName().isEmpty())
         MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-    MainWindow->resize(972, 545);
+    MainWindow->resize(860, 545);
     actionM_t_p_tin_nh_t_k_c50 = new QAction(MainWindow);
     actionM_t_p_tin_nh_t_k_c50->setObjectName(QString::fromUtf8("actionM_t_p_tin_nh_t_k_c50"));
     centralWidget = new QWidget(MainWindow);
@@ -99,7 +99,7 @@ public:
     MainWindow->setCentralWidget(centralWidget);
     menuBar = new QMenuBar(MainWindow);
     menuBar->setObjectName(QString::fromUtf8("menuBar"));
-    menuBar->setGeometry(QRect(0, 0, 972, 25));
+    menuBar->setGeometry(QRect(0, 0, 860, 25));
     menuT_p_tin = new QMenu(menuBar);
     menuT_p_tin->setObjectName(QString::fromUtf8("menuT_p_tin"));
     MainWindow->setMenuBar(menuBar);
@@ -120,11 +120,11 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-    MainWindow->setWindowTitle(QApplication::translate("MainWindow", "ANALYST_c50", 0, QApplication::UnicodeUTF8));
+    MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Tr\303\254nh xem k\341\272\277t qu\341\272\243", 0, QApplication::UnicodeUTF8));
     actionM_t_p_tin_nh_t_k_c50->setText(QApplication::translate("MainWindow", "M\341\273\237 t\341\273\207p tin nh\341\272\255t k\303\275 .c50", 0, QApplication::UnicodeUTF8));
-    name->setText(QApplication::translate("MainWindow", "Ch\341\273\215n t\341\272\255p tin l\306\260u tr\341\273\257 k\341\272\277t qu\341\272\243 info.c50 \304\221\341\273\203 m\341\273\237 l\341\272\241i c\303\241c d\341\273\257 li\341\273\207u \304\221\303\243 thu th\341\272\255p", 0, QApplication::UnicodeUTF8));
+    name->setText(QApplication::translate("MainWindow", "Ch\341\273\215n t\341\272\255p tin l\306\260u tr\341\273\257 k\341\272\277t qu\341\272\243 info.a05 \304\221\341\273\203 m\341\273\237 l\341\272\241i c\303\241c d\341\273\257 li\341\273\207u \304\221\303\243 thu th\341\272\255p", 0, QApplication::UnicodeUTF8));
     note->setText(QString());
-    pushButton->setText(QApplication::translate("MainWindow", "Ch\341\273\215n t\341\272\255p tin .c50", 0, QApplication::UnicodeUTF8));
+    pushButton->setText(QApplication::translate("MainWindow", "Ch\341\273\215n t\341\272\255p tin .a05", 0, QApplication::UnicodeUTF8));
     menuT_p_tin->setTitle(QApplication::translate("MainWindow", "T\341\273\207p tin", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

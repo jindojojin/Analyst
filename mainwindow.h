@@ -30,6 +30,7 @@ public slots:
     void add_row_to_table(QStringList);
 signals:
     void view_detail(QString);
+    void changeNameData(QString); //set title in HTML Viewer
     void read_info_file(QString);
 private slots:
     void on_actionM_t_p_tin_nh_t_k_c50_triggered();

@@ -12,7 +12,7 @@ void FileAnalyst::read_file_log(QString file_path){
     QFile info(file_path);
     QRegExp Name_matcher("(name=)([^\\n]*)");
     QRegExp Note_matcher("(note=)([^\\n]*)");
-    QRegExp Stamp_matcher("(stamp=)([^\\n]*)");
+//    QRegExp Stamp_matcher("(stamp=)([^\\n]*)");
     QRegExp TimeCreate_matcher("(timeCreate=)([^\\n]*)");
     QRegExp ProgramName_matcher("(programName=)([^\\n]*)");
     if(info.open(QFile::Text|QFile::ReadWrite)){
@@ -22,7 +22,7 @@ void FileAnalyst::read_file_log(QString file_path){
         Name_matcher.indexIn(reader.readLine());
         Note_matcher.indexIn(reader.readLine());
         qDebug()<< Name_matcher.cap(2);
-        emit add_infor_to_mainwindow(QString::fromUtf8("Ðuợc tạo bởi: ") + Name_matcher.cap(2),
+        emit add_infor_to_mainwindow(QString::fromUtf8("Được tảo bởi: ") + Name_matcher.cap(2),
                                      QString::fromUtf8("Ghi chú: ")+ Note_matcher.cap(2));
         reader.readLine();
         reader.readLine();
@@ -31,12 +31,12 @@ void FileAnalyst::read_file_log(QString file_path){
             QString resultFile = reader.readLine();
             TimeCreate_matcher.indexIn(reader.readLine());
             ProgramName_matcher.indexIn(reader.readLine());
-            Stamp_matcher.indexIn(reader.readLine());
-            Note_matcher.indexIn(reader.readLine());
+//            Stamp_matcher.indexIn(reader.readLine());
+//            Note_matcher.indexIn(reader.readLine());
             a.append(ProgramName_matcher.cap(2));
-            a.append(resultFile);
             a.append(TimeCreate_matcher.cap(2));
-            a.append(Note_matcher.cap(2));
+            a.append(resultFile);
+//            a.append(Note_matcher.cap(2));
 //            a.append(Stamp_matcher.cap(2));
             emit add_row_to_mainwindow(a);
             reader.readLine();
@@ -51,7 +51,7 @@ void FileAnalyst::read_file_html(QString filePath){
     qDebug()<<filePath;
     QRegExp Data_matcher("<td [^>]*>([^\<]*)");
     QRegExp Header_matcher("<th>([^\\n]*)");
-    emit add_infor_to_viewer(filePath);
+//    emit add_infor_to_viewer(this->name_of_data);
 
     if(info.open(QFile::Text|QFile::ReadWrite)){
         qDebug()<<"dã d?c file";
@@ -83,6 +83,10 @@ void FileAnalyst::read_file_html(QString filePath){
     }else{
         emit send_error(QString::fromUtf8("Tệp tin này không còn tồn tại"));
     }
+}
+void FileAnalyst::change_name_of_data(QString title){
+    qDebug()<<"Tieu de: "<<title;
+    emit add_infor_to_viewer(title);
 }
 
 void FileAnalyst::initHtmlViewer(){

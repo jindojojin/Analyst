@@ -2,6 +2,7 @@
 #include "ui_html_viewer.h"
 #include "QMenu"
 #include "QSignalMapper"
+#include "QDebug"
 HTML_VIEWER::HTML_VIEWER(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::HTML_VIEWER)
@@ -48,6 +49,7 @@ void HTML_VIEWER::on_tableView_customContextMenuRequested(const QPoint &pos)
 }
 
 void HTML_VIEWER::setInfo(QString info){
+    qDebug()<<"Can hien thi tren html viewer "<< info;
     this->ui->label_infor->setText(info);
 }
 
