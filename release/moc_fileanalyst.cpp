@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'fileanalyst.h'
 **
-** Created: Wed Apr 3 12:12:35 2019
+** Created: Wed Apr 3 22:07:24 2019
 **      by: The Qt Meta Object Compiler version 59 (Qt 4.4.0)
 **
 ** WARNING! All changes made in this file will be lost!

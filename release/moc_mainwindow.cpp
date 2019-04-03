@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Wed Apr 3 12:12:34 2019
+** Created: Wed Apr 3 22:07:24 2019
 **      by: The Qt Meta Object Compiler version 59 (Qt 4.4.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        1,       // revision
        0,       // classname
        0,    0, // classinfo
-      13,   10, // methods
+      14,   10, // methods
        0,    0, // properties
        0,    0, // enums/sets
 
@@ -41,8 +41,9 @@ static const uint qt_meta_data_MainWindow[] = {
      290,   11,   11,   11, 0x08,
      308,   11,   11,   11, 0x08,
      329,   11,   11,   11, 0x08,
-     340,   11,   11,   11, 0x08,
-     360,   11,   11,   11, 0x08,
+     354,   11,   11,   11, 0x08,
+     365,   11,   11,   11, 0x08,
+     385,   11,   11,   11, 0x08,
 
        0        // eod
 };
@@ -56,8 +57,8 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "pos\0on_tableView_customContextMenuRequested(QPoint)\0"
     "index\0on_tableView_doubleClicked(QModelIndex)\0"
     "viewWithBrowser()\0viewWithHtmlViewer()\0"
-    "editNote()\0show_error(QString)\0"
-    "on_pushButton_clicked()\0"
+    "viewWithHtmlViewer2(int)\0editNote()\0"
+    "show_error(QString)\0on_pushButton_clicked()\0"
 };
 
 const QMetaObject MainWindow::staticMetaObject = {
@@ -95,11 +96,12 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 7: on_tableView_doubleClicked((*reinterpret_cast< const QModelIndex(*)>(_a[1]))); break;
         case 8: viewWithBrowser(); break;
         case 9: viewWithHtmlViewer(); break;
-        case 10: editNote(); break;
-        case 11: show_error((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 12: on_pushButton_clicked(); break;
+        case 10: viewWithHtmlViewer2((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 11: editNote(); break;
+        case 12: show_error((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 13: on_pushButton_clicked(); break;
         }
-        _id -= 13;
+        _id -= 14;
     }
     return _id;
 }

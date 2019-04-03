@@ -40,15 +40,16 @@ void MainWindow::init_analyst(){
 }
 
 void MainWindow::setupTable(){
-    this->model = new QStandardItemModel(0,3,this);
+    this->model = new QStandardItemModel(0,4,this);
     model->setHorizontalHeaderItem(0,new QStandardItem(QString::fromUtf8("Tên phần mềm")));
-    model->setHorizontalHeaderItem(2,new QStandardItem(QString::fromUtf8("Kết quả")));
-//    model->setHorizontalHeaderItem(3,new QStandardItem(QString::fromUtf8("Ghi chú")));
+    model->setHorizontalHeaderItem(3,new QStandardItem(QString::fromUtf8("Kết quả")));
+    model->setHorizontalHeaderItem(2,new QStandardItem(QString::fromUtf8("G")));
     model->setHorizontalHeaderItem(1,new QStandardItem(QString::fromUtf8("Thời gian")));
     this->ui->tableView->setModel(model);
     this->ui->tableView->setAlternatingRowColors(true);
     this->ui->tableView->setColumnWidth(0,330);
-    this->ui->tableView->setColumnWidth(2,100);
+    this->ui->tableView->setColumnWidth(3,100);
+    this->ui->tableView->setColumnWidth(2,1);
     this->ui->tableView->setColumnWidth(1,360);
     this->ui->tableView->show();
 }
@@ -58,18 +59,19 @@ void MainWindow::add_row_to_table(QStringList list_data){
     int i=0;
     foreach(QString b, list_data){
         a.append(new QStandardItem(b));
-
     }
+    a.append(new QStandardItem(""));
     this->model->appendRow(a);
     QPushButton *btn_runx64 = new QPushButton();
     btn_runx64->setText(QString::fromUtf8("Xem kết quả"));
+    int index=this->ui->tableView->model()->rowCount()-1;
     btn_runx64->setStyleSheet("QPushButton{background-color:#00A551; font-size:12pt} QPushButton:hover{background-color:#64EDA2}");
-    this->ui->tableView->setIndexWidget(this->model->index(this->ui->tableView->model()->rowCount()-1,2),btn_runx64);
+    this->ui->tableView->setIndexWidget(this->model->index(index,3),btn_runx64);
     QSignalMapper *map64 = new QSignalMapper();
-//        map64->setMapping(btn_runx64,this->listProgram.size()-1);
-//        connect(btn_runx64,SIGNAL(clicked()),map64,SLOT(map()));
-//        connect(map64,SIGNAL(mapped(int)),this,SLOT(btn_run64_clicked(int)));
-    connect(btn_runx64,SIGNAL(clicked()),this,SLOT(viewWithHtmlViewer()));
+    map64->setMapping(btn_runx64,index);
+    connect(btn_runx64,SIGNAL(clicked()),map64,SLOT(map()));
+    connect(map64,SIGNAL(mapped(int)),this,SLOT(viewWithHtmlViewer2(int)));
+//    connect(btn_runx64,SIGNAL(clicked()),this,SLOT(viewWithHtmlViewer()));
 
 
 }
@@ -144,8 +146,22 @@ void MainWindow::viewWithHtmlViewer(){
     QString fileName = this->ui->tableView->model()->data(this->ui->tableView->model()->index(this->current_row_selected,2)).toString();
     QString nameofdata = this->ui->tableView->model()->data(this->ui->tableView->model()->index(this->current_row_selected,0)).toString();
 //    emit view_detail(MAIN_FOLDER+"/"+fileName);
-    ana->change_name_of_data(nameofdata);
+    qDebug()<<"File ket qua"<<fileName;
     ana->read_file_html(MAIN_FOLDER+"/"+fileName);
+    ana->change_name_of_data(nameofdata);
+}
+
+void MainWindow::viewWithHtmlViewer2(int i){
+    FileAnalyst *ana = new FileAnalyst();
+    QThread *th = new QThread();
+    ana->moveToThread(th);
+    th->start();
+    QString fileName = this->ui->tableView->model()->data(this->ui->tableView->model()->index(i,2)).toString();
+    QString nameofdata = this->ui->tableView->model()->data(this->ui->tableView->model()->index(i,0)).toString();
+//    emit view_detail(MAIN_FOLDER+"/"+fileName);
+    qDebug()<<"File ket qua"<<fileName;
+    ana->read_file_html(MAIN_FOLDER+"/"+fileName);
+    ana->change_name_of_data(nameofdata);
 }
 
 void MainWindow::editNote(){
