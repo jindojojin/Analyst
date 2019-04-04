@@ -3,6 +3,7 @@
 #include "QMenu"
 #include "QSignalMapper"
 #include "QDebug"
+#include "QString"
 HTML_VIEWER::HTML_VIEWER(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::HTML_VIEWER)
@@ -28,7 +29,7 @@ void HTML_VIEWER::addRow(QStringList list_data){
 void HTML_VIEWER::setHeader(QStringList list){
     this->model = new QStandardItemModel(0,list.count(),this);
     for(int i =0 ; i< list.count(); i++){
-        model->setHorizontalHeaderItem(i,new QStandardItem(list.at(i)));
+        model->setHorizontalHeaderItem(i,new QStandardItem(list[i]));
         this->visibleColumn[i]=1;
         QAction *action = new QAction(list.at(i),menu);
         action->setIcon(QIcon("checkIcon.png"));

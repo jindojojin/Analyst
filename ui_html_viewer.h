@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'html_viewer.ui'
 **
-** Created: Wed Aug 22 22:39:12 2018
+** Created: Thu Apr 4 07:50:08 2019
 **      by: Qt User Interface Compiler version 4.4.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -58,7 +58,7 @@ public:
 
     void retranslateUi(QWidget *HTML_VIEWER)
     {
-    HTML_VIEWER->setWindowTitle(QApplication::translate("HTML_VIEWER", "HTML_Viewer", 0, QApplication::UnicodeUTF8));
+    HTML_VIEWER->setWindowTitle(QApplication::translate("HTML_VIEWER", "Xem k\341\272\277t qu\341\272\243", 0, QApplication::UnicodeUTF8));
     label_infor->setText(QString());
     Q_UNUSED(HTML_VIEWER);
     } // retranslateUi
