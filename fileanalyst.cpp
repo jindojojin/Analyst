@@ -46,13 +46,19 @@ void FileAnalyst::read_file_log(QString file_path){
     }
 }
 
-void FileAnalyst::read_file_html(QString filePath){
-    this->initHtmlViewer();
+void FileAnalyst::read_file_html(QString filePath, QString name){
+//    QThread *th = new QThread();
+//    HTML_VIEWER *viewer= new HTML_VIEWER();
+//    viewer->moveToThread(th);
+//    viewer->setInfo(name);
+//    viewer->show();
+//    th->start();
+    //////////////// Phia tren copy tu ham innitHTMLViewer
     QFile info(filePath);
     qDebug()<<filePath;
     QRegExp Data_matcher("<td [^>]*>([^\<]*)");
     QRegExp Header_matcher("<th>([^\\n]*)");
-//    emit add_infor_to_viewer(this->name_of_data);
+    emit add_infor_to_viewer(name);
 
     if(info.open(QFile::Text|QFile::ReadWrite)){
         qDebug()<<"dã d?c file";
@@ -72,6 +78,7 @@ void FileAnalyst::read_file_html(QString filePath){
             datas.append(Data_matcher.cap(1));
             pos += Data_matcher.matchedLength();
         }
+//        viewer->setHeader(headers);
         emit add_header_to_viewer(headers);
         for(int i=0;i<datas.count();i+= headers.count()){
             QStringList row;
@@ -79,6 +86,7 @@ void FileAnalyst::read_file_html(QString filePath){
                 row.append(datas.at(i+j));
             }
             emit add_data_to_viewer(row);
+//            viewer->addRow(row);
         }
         info.close();
     }else{
@@ -95,9 +103,6 @@ void FileAnalyst::initHtmlViewer(){
     HTML_VIEWER *viewer= new HTML_VIEWER();
     viewer->moveToThread(th);
     viewer->show();
-//    connect(this,SIGNAL(add_header_to_viewer(QStringList)),viewer,SLOT(setHeader(QStringList)));
-//    connect(this,SIGNAL(add_data_to_viewer(QStringList)),viewer,SLOT(addRow(QStringList)));
-//    connect(this,SIGNAL(add_infor_to_viewer(QString)),viewer,SLOT(setInfo(QString)));
     th->start();
 //    return viewer;
 }

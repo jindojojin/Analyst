@@ -22,7 +22,7 @@ signals:
     void send_error(QString);
 
 public slots:
-    void read_file_html(QString);
+    void read_file_html(QString,QString);
     void read_file_log(QString);
     void change_name_of_data(QString);
 };

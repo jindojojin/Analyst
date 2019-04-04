@@ -4,13 +4,14 @@
 #include "QSignalMapper"
 #include "QDebug"
 #include "QString"
+#include "QTextCodec"
 HTML_VIEWER::HTML_VIEWER(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::HTML_VIEWER)
 {
     ui->setupUi(this);
     this->menu = new QMenu();
-
+    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("utf8"));
 }
 
 HTML_VIEWER::~HTML_VIEWER()
@@ -29,7 +30,7 @@ void HTML_VIEWER::addRow(QStringList list_data){
 void HTML_VIEWER::setHeader(QStringList list){
     this->model = new QStandardItemModel(0,list.count(),this);
     for(int i =0 ; i< list.count(); i++){
-        model->setHorizontalHeaderItem(i,new QStandardItem(list[i]));
+        model->setHorizontalHeaderItem(i,new QStandardItem(QString(list[i])));
         this->visibleColumn[i]=1;
         QAction *action = new QAction(list.at(i),menu);
         action->setIcon(QIcon("checkIcon.png"));

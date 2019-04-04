@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'fileanalyst.h'
 **
-** Created: Wed Apr 3 22:07:24 2019
+** Created: Thu Apr 4 08:43:23 2019
 **      by: The Qt Meta Object Compiler version 59 (Qt 4.4.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -36,9 +36,9 @@ static const uint qt_meta_data_FileAnalyst[] = {
      186,   12,   12,   12, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-     206,   12,   12,   12, 0x0a,
-     230,   12,   12,   12, 0x0a,
-     253,   12,   12,   12, 0x0a,
+     206,   13,   12,   12, 0x0a,
+     238,   12,   12,   12, 0x0a,
+     261,   12,   12,   12, 0x0a,
 
        0        // eod
 };
@@ -49,7 +49,7 @@ static const char qt_meta_stringdata_FileAnalyst[] = {
     "add_header_to_viewer(QStringList)\0"
     "add_data_to_viewer(QStringList)\0"
     "add_infor_to_viewer(QString)\0"
-    "send_error(QString)\0read_file_html(QString)\0"
+    "send_error(QString)\0read_file_html(QString,QString)\0"
     "read_file_log(QString)\0"
     "change_name_of_data(QString)\0"
 };
@@ -85,7 +85,7 @@ int FileAnalyst::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 3: add_data_to_viewer((*reinterpret_cast< QStringList(*)>(_a[1]))); break;
         case 4: add_infor_to_viewer((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 5: send_error((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 6: read_file_html((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 6: read_file_html((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
         case 7: read_file_log((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 8: change_name_of_data((*reinterpret_cast< QString(*)>(_a[1]))); break;
         }

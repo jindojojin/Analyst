@@ -1,6 +1,7 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "fileanalyst.h"
+#include "html_viewer.h"
 #include "QFileDialog"
 #include "QDebug"
 #include "QMessageBox"
@@ -186,8 +187,8 @@ void MainWindow::viewWithHtmlViewer(){
     QString nameofdata = this->ui->tableView->model()->data(this->ui->tableView->model()->index(this->current_row_selected,0)).toString();
 //    emit view_detail(MAIN_FOLDER+"/"+fileName);
     qDebug()<<"File ket qua"<<fileName;
-    ana->read_file_html(MAIN_FOLDER+"/"+fileName);
-    ana->change_name_of_data(nameofdata);
+    ana->read_file_html(MAIN_FOLDER+"/"+fileName,nameofdata);
+//    ana->change_name_of_data(nameofdata);
 }
 
 void MainWindow::viewWithHtmlViewer2(int i){
@@ -195,12 +196,27 @@ void MainWindow::viewWithHtmlViewer2(int i){
     QThread *th = new QThread();
     ana->moveToThread(th);
     th->start();
+
+    HTML_VIEWER *view = new HTML_VIEWER();
+    QThread *th2 = new QThread();
+    view->moveToThread(th2);
+    view->show();
+    view->setInfo("Đang tải dữ liệu...");
+    th2->start();
+
+    connect(ana,SIGNAL(add_header_to_viewer(QStringList)),view,SLOT(setHeader(QStringList)));
+    connect(ana,SIGNAL(add_data_to_viewer(QStringList)),view,SLOT(addRow(QStringList)));
+    connect(ana,SIGNAL(add_infor_to_viewer(QString)),view,SLOT(setInfo(QString)));
+
+
+
+
     QString fileName = this->ui->tableView->model()->data(this->ui->tableView->model()->index(i,2)).toString();
     QString nameofdata = this->ui->tableView->model()->data(this->ui->tableView->model()->index(i,0)).toString();
 //    emit view_detail(MAIN_FOLDER+"/"+fileName);
     qDebug()<<"File ket qua"<<fileName;
-    ana->read_file_html(MAIN_FOLDER+"/"+fileName);
-    ana->change_name_of_data(nameofdata);
+    ana->read_file_html(MAIN_FOLDER+"/"+fileName,nameofdata);
+//    ana->change_name_of_data(nameofdata);
 }
 
 void MainWindow::editNote(){
