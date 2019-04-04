@@ -3,6 +3,7 @@
 #include "QTextStream"
 #include "QDebug"
 #include "html_viewer.h"
+#include "QThread"
 FileAnalyst::FileAnalyst(QObject *parent) :
     QObject(parent)
 {
@@ -90,9 +91,13 @@ void FileAnalyst::change_name_of_data(QString title){
 }
 
 void FileAnalyst::initHtmlViewer(){
+    QThread *th = new QThread();
     HTML_VIEWER *viewer= new HTML_VIEWER();
+    viewer->moveToThread(th);
     viewer->show();
-    connect(this,SIGNAL(add_header_to_viewer(QStringList)),viewer,SLOT(setHeader(QStringList)));
-    connect(this,SIGNAL(add_data_to_viewer(QStringList)),viewer,SLOT(addRow(QStringList)));
-    connect(this,SIGNAL(add_infor_to_viewer(QString)),viewer,SLOT(setInfo(QString)));
+//    connect(this,SIGNAL(add_header_to_viewer(QStringList)),viewer,SLOT(setHeader(QStringList)));
+//    connect(this,SIGNAL(add_data_to_viewer(QStringList)),viewer,SLOT(addRow(QStringList)));
+//    connect(this,SIGNAL(add_infor_to_viewer(QString)),viewer,SLOT(setInfo(QString)));
+    th->start();
+//    return viewer;
 }

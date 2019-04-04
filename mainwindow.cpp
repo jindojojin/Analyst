@@ -9,6 +9,7 @@
 #include "QPushButton"
 #include "QSignalMapper"
 #include "QThread"
+#include "QFile"
 QString MAIN_FOLDER;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -89,8 +90,46 @@ void MainWindow::on_actionM_t_p_tin_nh_t_k_c50_triggered()
     this->model->clear();
     this->setupTable();
     MAIN_FOLDER = file.absoluteDir().absolutePath();
-    emit read_info_file(file_path);
+//    emit read_info_file(file_path);
     qDebug() << MAIN_FOLDER;
+
+    // Khong goi den file analyst nưa ma thuc hien o day luon
+
+    QFile info(file_path);
+    QRegExp Name_matcher("(name=)([^\\n]*)");
+    QRegExp Note_matcher("(note=)([^\\n]*)");
+//    QRegExp Stamp_matcher("(stamp=)([^\\n]*)");
+    QRegExp TimeCreate_matcher("(timeCreate=)([^\\n]*)");
+    QRegExp ProgramName_matcher("(programName=)([^\\n]*)");
+    if(info.open(QFile::Text|QFile::ReadWrite)){
+        qDebug()<<"dã d?c file";
+        QTextStream reader(&info);
+        reader.setCodec("UTF-8");
+        Name_matcher.indexIn(reader.readLine());
+        Note_matcher.indexIn(reader.readLine());
+        qDebug()<< Name_matcher.cap(2);
+        this->add_infor_to_screen(QString::fromUtf8("Được tảo bởi: ") + Name_matcher.cap(2),
+                                     QString::fromUtf8("Ghi chú: ")+ Note_matcher.cap(2));
+        reader.readLine();
+        reader.readLine();
+        while(!reader.atEnd()){
+            QStringList a;
+            QString resultFile = reader.readLine();
+            TimeCreate_matcher.indexIn(reader.readLine());
+            ProgramName_matcher.indexIn(reader.readLine());
+//            Stamp_matcher.indexIn(reader.readLine());
+//            Note_matcher.indexIn(reader.readLine());
+            a.append(ProgramName_matcher.cap(2));
+            a.append(TimeCreate_matcher.cap(2));
+            a.append(resultFile);
+//            a.append(Note_matcher.cap(2));
+//            a.append(Stamp_matcher.cap(2));
+            this->add_row_to_table(a);
+//            emit add_row_to_mainwindow(a);
+            reader.readLine();
+        }
+        info.close();
+    }
 }
 
 void MainWindow::on_tableView_customContextMenuRequested(const QPoint &pos)
